@@ -60,40 +60,54 @@ export default function AddPayment() {
           <div className="mt-3 mb-1 col-sm-6 col-lg-4">
             <div class="form-group">
               <label for="clas">Student's Class</label>
-              <input
-                requird
-                type="text"
+              <select
                 class="form-control"
                 id="clas"
                 name="clas"
                 placeholder="Enter Class"
-              />
+              >
+                <option value="" disabled selected>Select Your Class</option>
+                <option value="Com.Maths">Com.Maths</option>
+                <option value="Biology">Biology</option>
+                <option value="Commerce">Commerce</option>
+                <option value="Arts">Arts</option>
+              </select>
             </div>
           </div>
           <div className="mt-3 mb-1 col-sm-6 col-lg-4">
             <div class="form-group">
               <label for="perpose">Perpose</label>
-              <input
-                requird
-                type="text"
+              <select
                 class="form-control"
                 id="perpose"
                 name="perpose"
                 placeholder="Enter perpose for the payment"
-              />
+              >
+                <option value="" disabled selected>Select Perpose For Payment</option>
+                <option value="Admission fee">Admission fee</option>
+                <option value="Tution fee">Tution fee</option>
+                <option value="Exam fee">Exam fee</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
           </div>
           <div className="mt-3 mb-1 col-sm-6 col-lg-4">
             <div class="form-group">
               <label for="bank">Bank Name</label>
-              <input
-                requird
-                type="text"
+              <select
                 class="form-control"
                 id="bank"
                 name="bank"
                 placeholder="Enter Bank Name"
-              />
+              >
+                <option value="" disabled selected>Select Bank Name</option>
+                <option value="BOC">BOC</option>
+                <option value="Sampath Bank">Sampath Bank</option>
+                <option value="NTB">NTB</option>
+                <option value="Commercial Bank">Commercial Bank</option>
+                <option value="People's Bank">People's Bank</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
           </div>
           <div className="mt-3 mb-1 col-sm-6 col-lg-4">
