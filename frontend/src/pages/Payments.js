@@ -5,6 +5,7 @@ import { NavLink, Switch, Route, Redirect } from "react-router-dom";
 import Payments_Overview from "./Payments_Overview";
 import Payments_List from "./Payments_List";
 import Payments_Add from "./Payments_Add";
+import Payments_Edit from "./Payments_Edit";
 import Payments_Users from "./Payments_Users";
 import Payments_Settings from "./Payments_Settings";
 
@@ -47,6 +48,10 @@ const Payments = (props) => {
             ></Route>
             <Route path="/payments/list" component={Payments_List}></Route>
             <Route path="/payments/add" component={Payments_Add}></Route>
+            <Route
+              path="/payments/edit/:id"
+              render={(props) => <Payments_Edit {...props} />}
+            ></Route>
             <Route path="/payments/users" component={Payments_Users}></Route>
             <Route
               path="/payments/settings"

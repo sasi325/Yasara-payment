@@ -1,7 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function AddPayment() {
+const Payment_Edit = (props) => {
+  const [itemData, setItemData] = useState({});
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8070/payment/get/${props.match.params.id}`)
+      .then((resp) => {
+        setItemData(resp.data.payment);
+      })
+      .catch((err) => {
+        alert("cannot get pament data");
+        window.location.href = "/payments/list";
+      });
+  }, []);
+
   function sendData(e) {
     e.preventDefault();
 
@@ -15,24 +29,15 @@ export default function AddPayment() {
       date: e.target.date.value,
     };
 
-    // form data object for send to API
-    var ReqBody = new FormData();
-
-    // add all daata in new payment variable to formsata object
-    Object.keys(newPayment).map((key) => {
-      ReqBody.append(key, newPayment[key]);
-    });
-
-    // add file to formdata
-    ReqBody.append("payslip", e.target.payslip.files[0]);
-
-    console.log("json : ", newPayment);
-    console.log("Form data : ", ReqBody);
 
     axios
-      .post("http://localhost:8070/payment/add", ReqBody)
+      .put(
+        `http://localhost:8070/payment/update/${props.match.params.id}`,
+        newPayment
+
+      )
       .then(() => {
-        alert("Payment Added");
+        alert("Successfully updated the payment");
         window.location.href = "/payments/list";
       })
       .catch((err) => {
@@ -42,32 +47,46 @@ export default function AddPayment() {
 
   return (
     <div className="container">
-      <h1>Online Payment</h1>
+      <h1>Edit Payment : {props.match.params.id}</h1>
       <form onSubmit={sendData}>
-        <div className="container row addPaymentForm">
+        <div className="container row Payment_EditForm">
           <div className="mt-3 mb-1 col-sm-6 col-lg-4">
-            <div class="form-group">
+            <div className="form-group">
               <label for="name">Student Name</label>
               <input
                 requird
                 type="text"
-                class="form-control"
+                className="form-control"
                 id="name"
                 name="name"
+                onChange={(e) => {
+                  setItemData((st) => {
+                    return { ...st, name: e.target.value };
+                  });
+                }}
+                value={itemData.name}
                 placeholder="Enter Full Name"
               />
             </div>
           </div>
           <div className="mt-3 mb-1 col-sm-6 col-lg-4">
-            <div class="form-group">
+            <div className="form-group">
               <label for="clas">Student's Class</label>
               <select
-                class="form-control"
+                className="form-control"
                 id="clas"
                 name="clas"
+                onChange={(e) => {
+                  setItemData((st) => {
+                    return { ...st, class: e.target.value };
+                  });
+                }}
+                value={itemData.class}
                 placeholder="Enter Class"
               >
-                <option value="" disabled selected>Select Your Class</option>
+                <option value="" disabled selected>
+                  Select Your Class
+                </option>
                 <option value="Com.Maths">Com.Maths</option>
                 <option value="Biology">Biology</option>
                 <option value="Commerce">Commerce</option>
@@ -76,15 +95,23 @@ export default function AddPayment() {
             </div>
           </div>
           <div className="mt-3 mb-1 col-sm-6 col-lg-4">
-            <div class="form-group">
+            <div className="form-group">
               <label for="perpose">Perpose</label>
               <select
-                class="form-control"
+                className="form-control"
                 id="perpose"
                 name="perpose"
+                onChange={(e) => {
+                  setItemData((st) => {
+                    return { ...st, perpose: e.target.value };
+                  });
+                }}
+                value={itemData.perpose}
                 placeholder="Enter perpose for the payment"
               >
-                <option value="" disabled selected>Select Perpose For Payment</option>
+                <option value="" disabled selected>
+                  Select Perpose For Payment
+                </option>
                 <option value="Admission fee">Admission fee</option>
                 <option value="Tution fee">Tution fee</option>
                 <option value="Exam fee">Exam fee</option>
@@ -93,15 +120,23 @@ export default function AddPayment() {
             </div>
           </div>
           <div className="mt-3 mb-1 col-sm-6 col-lg-4">
-            <div class="form-group">
+            <div className="form-group">
               <label for="bank">Bank Name</label>
               <select
-                class="form-control"
+                className="form-control"
                 id="bank"
                 name="bank"
+                onChange={(e) => {
+                  setItemData((st) => {
+                    return { ...st, bank: e.target.value };
+                  });
+                }}
+                value={itemData.bank}
                 placeholder="Enter Bank Name"
               >
-                <option value="" disabled selected>Select Bank Name</option>
+                <option value="" disabled selected>
+                  Select Bank Name
+                </option>
                 <option value="BOC">BOC</option>
                 <option value="Sampath Bank">Sampath Bank</option>
                 <option value="NTB">NTB</option>
@@ -112,46 +147,61 @@ export default function AddPayment() {
             </div>
           </div>
           <div className="mt-3 mb-1 col-sm-6 col-lg-4">
-            <div class="form-group">
+            <div className="form-group">
               <label for="amount">Amount</label>
               <input
                 requird
                 type="Number"
-                class="form-control"
+                className="form-control"
                 id="amount"
                 name="amount"
+                onChange={(e) => {
+                  setItemData((st) => {
+                    return { ...st, amount: e.target.value };
+                  });
+                }}
+                value={itemData.amount}
                 placeholder="Enter Payment Amount"
               />
             </div>
           </div>
           <div className="mt-3 mb-1 col-sm-6 col-lg-4">
-            <div class="form-group">
+            <div className="form-group">
               <label for="date">Date</label>
               <input
                 requird
                 type="date"
-                class="form-control"
+                className="form-control"
                 id="date"
                 name="date"
+                onChange={(e) => {
+                  setItemData((st) => {
+                    return { ...st, date: e.target.value };
+                  });
+                }}
+                value={itemData.date ? itemData.date.split("T")[0] : ""}
                 placeholder="Enter Date"
               />
             </div>
           </div>
-          <div className="mt-3 mb-4 col-sm-12 col-lg-12">
-            <div class="form-group">
+          {/* <div className="mt-3 mb-4 col-sm-12 col-lg-12">
+            <div className="form-group">
               <label for="date">pay slip</label>
               <input
                 requird
                 type="file"
-                class="form-control"
+                className="form-control"
                 id="payslip"
                 name="payslip"
+                onChange={e => {setItemData(st =>{ return {...st, payslip:e.target.value}})}}
+                
+                value={itemData.payslip}
                 placeholder="Upload your payment slip"
               />
             </div>
-          </div>
+          </div> */}
           <div className="mt-3 mb-1 col-sm-12 col-lg-12">
-            <button type="submit" class="btn dubmitButton">
+            <button type="submit" className="btn dubmitButton">
               Submit
             </button>
           </div>
@@ -159,4 +209,6 @@ export default function AddPayment() {
       </form>
     </div>
   );
-}
+};
+
+export default Payment_Edit;
