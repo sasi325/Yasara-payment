@@ -25,7 +25,7 @@ const PaymentCard = (props) => {
           <p>
             <span className="title">Date : </span>
             <span className="data">
-              {props.data.date.replace(/[TZ]+/g, " ")}
+              {props.data.date ? props.data.date.replace(/[TZ]+/g, " ") : ""}
             </span>
             <br />
             <span className="title">Bank : </span>
@@ -59,7 +59,11 @@ const PaymentCard = (props) => {
           >
             <i class="fas fa-image"></i>
           </button>
-          <button>
+          <button
+            onClick={() => {
+              window.location.href = `/payments/edit/${props.data._id}`;
+            }}
+          >
             <i class="fas fa-edit"></i>
           </button>
           <button onClick={DeleteItem}>
@@ -71,7 +75,7 @@ const PaymentCard = (props) => {
       <div
         className={ShowImage ? "dynamic openPaySlip" : "dynamic closePaySlip"}
       >
-        <img src={props.data.payslip} alt="" srcset="" />
+        <img src={"http://localhost:8070/public/" + props.data.payslip} alt="" srcset="" />
       </div>
     </div>
   );

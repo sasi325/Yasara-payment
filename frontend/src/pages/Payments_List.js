@@ -13,7 +13,52 @@ const Payments_List = (props) => {
         setPaymentsList(resp.data);
       })
       .catch((err) => {
-        setPaymentsList([]);
+        setPaymentsList([
+          {
+            id: "613a139eba3cf55460af1c3e",
+            name: "sasi",
+            class: "adad",
+            perpose: "fee",
+            bank: "boc",
+            amount: 2432,
+            payslip : "https://help.myob.com/wiki/download/attachments/17273963/Note%20on%20pay%20slip.jpg?version=1&modificationDate=1519266766000&api=v2",
+            date: "2021-09-09T14:01:02.000Z",
+            _v: 0,
+          },
+          {
+            id: "613a139eba3cf55460af1c3e",
+            name: "sasi",
+            class: "adad",
+            perpose: "fee",
+            bank: "boc",
+            amount: 2432,
+            payslip : "https://help.myob.com/wiki/download/attachments/17273963/Note%20on%20pay%20slip.jpg?version=1&modificationDate=1519266766000&api=v2",
+            date: "2021-09-09T14:01:02.000Z",
+            _v: 0,
+          },
+          {
+            id: "613a139eba3cf55460af1c3e",
+            name: "sasi",
+            class: "adad",
+            perpose: "fee",
+            bank: "boc",
+            amount: 2432,
+            payslip : "https://help.myob.com/wiki/download/attachments/17273963/Note%20on%20pay%20slip.jpg?version=1&modificationDate=1519266766000&api=v2",
+            date: "2021-09-09T14:01:02.000Z",
+            _v: 0,
+          },
+          {
+            id: "613a139eba3cf55460af1c3e",
+            name: "sasi",
+            class: "adad",
+            perpose: "fee",
+            bank: "boc",
+            amount: 2432,
+            payslip : "https://help.myob.com/wiki/download/attachments/17273963/Note%20on%20pay%20slip.jpg?version=1&modificationDate=1519266766000&api=v2",
+            date: "2021-09-09T14:01:02.000Z",
+            _v: 0,
+          },
+        ]);
       });
   };
 
