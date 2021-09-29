@@ -3,14 +3,14 @@ import axios from "axios";
 
 import "../styles/paymentCard2.css";
 
-const PaymentCard = (props) => {
+const ExpenceCard = (props) => {
   const [ShowImage, setShowImage] = useState(false);
 
   const DeleteItem = () => {
     axios
       .delete("http://localhost:8070/payment/delete/" + props.data._id)
       .then(() => {
-        alert("Payment Deleted");
+        alert("Expence Deleted");
         props.FetchItems();
       })
       .catch((err) => {
@@ -37,11 +37,11 @@ const PaymentCard = (props) => {
         </div>
         <div className="details">
           <p>
-            <span className="title">Student name : </span>
+            <span className="title">Name : </span>
             <span className="data">{props.data.name}</span>
             <br />
-            <span className="title">Student class : </span>
-            <span className="data">{props.data.class}</span>
+            <span className="title">Post : </span>
+            <span className="data">{props.data.post}</span>
           </p>
         </div>
 
@@ -81,4 +81,4 @@ const PaymentCard = (props) => {
   );
 };
 
-export default PaymentCard;
+export default ExpenceCard;

@@ -6,11 +6,12 @@ import Payments_Overview from "./Payments_Overview";
 import Payments_List from "./Payments_List";
 import Payments_Add from "./Payments_Add";
 import Payments_Edit from "./Payments_Edit";
-import Payments_Users from "./Payments_Users";
-import Payments_Settings from "./Payments_Settings";
+import Expences_Edit from "./Expences_Edit";
 
 // styles
 import "../styles/payments.css";
+import Expences_Add from "./Expences_Add";
+import Expences_List from "./Expences_List";
 
 const Payments = (props) => {
   return (
@@ -24,16 +25,16 @@ const Payments = (props) => {
             <i className="far fa-chart-bar"></i>Overview
           </NavLink>
           <NavLink activeClassName="active" to="/payments/list">
-            <i className="fas fa-list"></i> List
+            <i className="fas fa-list"></i> Payment list
           </NavLink>
           <NavLink activeClassName="active" to="/payments/add">
-            <i className="fas fa-money-bill-wave"></i>add
+            <i className="fas fa-money-bill-wave"></i> Payment add
           </NavLink>
-          <NavLink activeClassName="active" to="/payments/users">
-            <i className="fas fa-users"></i> Users
+          <NavLink activeClassName="active" to="/payments/expence_list">
+            <i className="fas fa-users"></i> Expence list
           </NavLink>
-          <NavLink activeClassName="active" to="/payments/settings">
-            <i className="fas fa-cogs"></i> Settings
+          <NavLink activeClassName="active" to="/payments/expence_add">
+            <i className="fas fa-cogs"></i> Expence add
           </NavLink>
         </div>
 
@@ -52,10 +53,14 @@ const Payments = (props) => {
               path="/payments/edit/:id"
               render={(props) => <Payments_Edit {...props} />}
             ></Route>
-            <Route path="/payments/users" component={Payments_Users}></Route>
+            <Route path="/payments/expence_list" component={Expences_List}></Route>
             <Route
-              path="/payments/settings"
-              component={Payments_Settings}
+              path="/payments/expence_add"
+              component={Expences_Add}
+            ></Route>
+            <Route
+              path="/payments/edit/:id"
+              render={(props) => <Expences_Edit {...props} />}
             ></Route>
 
             <Route

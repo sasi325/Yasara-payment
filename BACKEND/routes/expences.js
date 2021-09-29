@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { v4: uuidv4 } = require("uuid");
 let multer = require("multer");
-const Payment = require("../models/payment");
+const Expence = require("../models/expences");
 
 const DIR = "./public/";
 
@@ -35,15 +35,15 @@ router.post("/add", upload.single("payslip"), (req, res, next) => {
   console.log(req.file);
   // var file = req.files.payslip;
   const name = req.body.name;
-  const clas = req.body.clas;
+  const post = req.body.post;
   const perpose = req.body.perpose;
   const bank = req.body.bank;
   const amount = Number(req.body.amount);
   const date = Date(req.body.date);
 
-  const newPayment = new Payment({
+  const newExpence = new Expence({
     name,
-    class: clas,
+    post,
     perpose,
     bank,
     amount,
@@ -51,10 +51,10 @@ router.post("/add", upload.single("payslip"), (req, res, next) => {
     payslip: req.file.filename,
   });
 
-  newPayment
+  newExpence
     .save()
     .then(() => {
-      res.json("Payment Added");
+      res.json("Expence Added");
     })
     .catch((err) => {
       console.log(err);
@@ -62,9 +62,9 @@ router.post("/add", upload.single("payslip"), (req, res, next) => {
 });
 
 router.route("/").get((req, res) => {
-  Payment.find()
-    .then((payments) => {
-      res.json(payments);
+  Expence.find()
+    .then((expences) => {
+      res.json(expences);
     })
     .catch((err) => {
       console.log(err);
@@ -72,16 +72,16 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/update/:id").put(async (req, res) => {
-  let paymentID = req.params.id;
-  const { name, clas, perpose, bank, amount, date } = req.body;
+  let expenceID = req.params.id;
+  const { name, post, perpose, bank, amount, date } = req.body;
 
   console.log(req.body);
 
-  Payment.findById(paymentID)
-    .then(async (payment) => {
-      const updatePayment = {
+  Payment.findById(expenceID)
+    .then(async (expence) => {
+      const updateExpence = {
         name,
-        class : clas,
+        post,
         perpose,
         bank,
         amount,
@@ -89,9 +89,9 @@ router.route("/update/:id").put(async (req, res) => {
         payslip : payment.payslip
       };
     
-      const update = await Payment.findByIdAndUpdate(paymentID, updatePayment)
+      const update = await Expence.findByIdAndUpdate(expenceID, updateExpence)
         .then(() => {
-          res.status(200).send({ status: "Payment details updated" });
+          res.status(200).send({ status: "Expence details updated" });
         })
         .catch((err) => {
           console.log(err);
@@ -107,29 +107,28 @@ router.route("/update/:id").put(async (req, res) => {
 });
 
 router.route("/delete/:id").delete(async (req, res) => {
-  let paymentID = req.params.id;
+  let expenceID = req.params.id;
 
-  await Payment.findByIdAndDelete(paymentID)
+  await Expence.findByIdAndDelete(expenceID)
     .then(() => {
-      res.status(200).send({ status: "Payment details deleted" });
+      res.status(200).send({ status: "Expence details deleted" });
     })
     .catch((err) => {
       console.log(err.message);
       res
         .status(500)
         .send({
-          status: "Error, Failed to delete the payment",
+          status: "Error, Failed to delete the expence",
           error: err.message,
         });
     });
 });
 
 router.route("/get/:id").get(async (req, res) => {
-  let paymentID = req.params.id;
-  Payment.findById(paymentID)
-    .then((payment) => {
-      console.log(payment);
-      res.status(200).send({ status: "success", payment });
+  let expenceID = req.params.id;
+  Expence.findById(expencetID)
+    .then((expence) => {
+      res.status(200).send({ status: "success", expence });
     })
     .catch((err) => {
       console.log(err);
